@@ -10,5 +10,6 @@ go get "github.com/zenazn/goji"
 go build -o app
 systemctl restart isu-go
 
-rm /var/log/mysql/mysql-slow.log
+#rm /var/log/mysql/mysql-slow.log
 systemctl restart mysql
+systemctl restart nginx 

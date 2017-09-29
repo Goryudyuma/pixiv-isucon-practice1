@@ -1,6 +1,8 @@
 package main
 
 import (
+    "bytes"
+    "compress/gzip"
 	crand "crypto/rand"
 	"encoding/hex"
 	"fmt"
@@ -182,7 +184,7 @@ func makePosts(results []Post, CSRFToken string, allComments bool) ([]Post, erro
 	var posts []Post
 
 	for _, p := range results {
-		err := db.Get(&p.CommentCount, "SELECT COUNT(*) AS `count` FROM `comments` WHERE `post_id` = ?", p.ID)
+		err := db.Get(&p.CommentCount, "SELECT COUNT(1) AS `count` FROM `comments` WHERE `post_id` = ?", p.ID)
 		if err != nil {
 			return nil, err
 		}
@@ -395,7 +397,9 @@ func getIndex(w http.ResponseWriter, r *http.Request) {
 	results := []Post{}
 
 	//err := db.Select(&results, "SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` ORDER BY `created_at` DESC")
-	err := db.Select(&results, "SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` ORDER BY `id` DESC limit 22")
+	//err := db.Select(&results, "SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` ORDER BY `id` DESC limit 22")
+	//err := db.Select(&results, "SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` INNER JOIN `user` ON `user`.`id` = `user_id` WHERE `user`.`del_flg` = 0 ORDER BY `id` DESC limit 22")
+	err := db.Select(&results, "SELECT `posts`.`id`, `user_id`, `body`, `mime`, `posts`.`created_at` FROM `posts` INNER JOIN `users` ON `users`.`id` = `user_id` WHERE `users`.`del_flg` = 0 ORDER BY `posts`.`id` DESC limit 22;")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -454,7 +458,7 @@ func getAccountName(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 
 	commentCount := 0
-	cerr := db.Get(&commentCount, "SELECT COUNT(*) AS count FROM `comments` WHERE `user_id` = ?", user.ID)
+	cerr := db.Get(&commentCount, "SELECT COUNT(1) AS count FROM `comments` WHERE `user_id` = ?", user.ID)
 	if cerr != nil {
 		fmt.Println(cerr)
 		return
@@ -482,7 +486,7 @@ func getAccountName(c web.C, w http.ResponseWriter, r *http.Request) {
 			args[i] = v
 		}
 
-		ccerr := db.Get(&commentedCount, "SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN ("+placeholder+")", args...)
+		ccerr := db.Get(&commentedCount, "SELECT COUNT(1) AS count FROM `comments` WHERE `post_id` IN ("+placeholder+")", args...)
 		if ccerr != nil {
 			fmt.Println(ccerr)
 			return
@@ -622,16 +626,19 @@ func postIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	mime := ""
+	mime, tail := "", ""
 	if file != nil {
 		// 投稿のContent-Typeからファイルのタイプを決定する
 		contentType := header.Header["Content-Type"][0]
 		if strings.Contains(contentType, "jpeg") {
 			mime = "image/jpeg"
+			tail = ".jpg.gz"
 		} else if strings.Contains(contentType, "png") {
 			mime = "image/png"
+			tail = ".png.gz"
 		} else if strings.Contains(contentType, "gif") {
 			mime = "image/gif"
+			tail = ".gif.gz"
 		} else {
 			session := getSession(r)
 			session.Values["notice"] = "投稿できる画像形式はjpgとpngとgifだけです"
@@ -656,6 +663,25 @@ func postIndex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+
+	query := "INSERT INTO `posts` (`user_id`, `mime`, `body`) VALUES (?,?,?)"
+	result, eerr := db.Exec(
+		query,
+		me.ID,
+		mime,
+		r.FormValue("body"),
+	)
+	if eerr != nil {
+		fmt.Println(eerr.Error())
+		return
+	}
+
+	pid, lerr := result.LastInsertId()
+	//res, _ := db.Query("select LAST_INSERT_ID()")
+    z, _ := makeGzip(filedata)
+ioutil.WriteFile(`/home/isucon/private_isu/webapp/public/image/` + strconv.FormatInt(pid, 10) + tail, z, os.ModePerm)
+
+/*
 	query := "INSERT INTO `posts` (`user_id`, `mime`, `imgdata`, `body`) VALUES (?,?,?,?)"
 	result, eerr := db.Exec(
 		query,
@@ -668,8 +694,8 @@ func postIndex(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(eerr.Error())
 		return
 	}
+*/
 
-	pid, lerr := result.LastInsertId()
 	if lerr != nil {
 		fmt.Println(lerr.Error())
 		return
@@ -847,3 +873,18 @@ func main() {
 	goji.Get("/*", http.FileServer(http.Dir("../public")))
 	goji.Serve()
 }
+
+func makeGzip(body []byte) ([]byte, error) {
+    var b bytes.Buffer
+    err := func() error {
+        gw := gzip.NewWriter(&b)
+        defer gw.Close()
+
+        if _, err := gw.Write(body); err != nil {
+            return err
+        }
+        return nil
+    }()
+    return b.Bytes(), err
+}
+
