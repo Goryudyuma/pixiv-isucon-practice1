@@ -8,3 +8,7 @@ go get "github.com/jmoiron/sqlx"
 go get "github.com/zenazn/goji"
 
 go build -o app
+systemctl restart isu-go
+
+rm /var/log/mysql/mysql-slow.log
+systemctl restart mysql
