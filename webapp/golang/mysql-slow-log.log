@@ -1,0 +1,242 @@
+Count: 642  Time=0.07s (42s)  Lock=0.00s (0s)  Rows=10032.4 (6440816), root[root]@localhost
+  SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` ORDER BY `id` DESC
+
+Count: 217  Time=0.06s (12s)  Lock=0.00s (0s)  Rows=1.0 (217), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `user_id` = N
+
+Count: 8262  Time=0.00s (10s)  Lock=0.00s (0s)  Rows=1.0 (8262), root[root]@localhost
+  SELECT * FROM `posts` WHERE `id` = N
+
+Count: 217  Time=0.02s (5s)  Lock=0.00s (0s)  Rows=10.0 (2177), root[root]@localhost
+  SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` WHERE `user_id` = N ORDER BY `id` DESC
+
+Count: 58  Time=0.08s (4s)  Lock=0.00s (0s)  Rows=9985.0 (579129), root[root]@localhost
+  SELECT `id`, `user_id`, `body`, `mime`, `created_at` FROM `posts` WHERE `created_at` <= 'S' ORDER BY `id` DESC
+
+Count: 164323  Time=0.00s (4s)  Lock=0.00s (0s)  Rows=10.4 (1712300), 2users@localhost
+  #
+
+Count: 37280  Time=0.00s (4s)  Lock=0.00s (0s)  Rows=1.0 (37280), root[root]@localhost
+  SELECT * FROM `users` WHERE `id` = N
+
+Count: 16451  Time=0.00s (1s)  Lock=0.00s (0s)  Rows=1.1 (17506), root[root]@localhost
+  SELECT * FROM `comments` WHERE `post_id` = N ORDER BY `id` DESC LIMIT N
+
+Count: 16727  Time=0.00s (1s)  Lock=0.00s (0s)  Rows=1.0 (16727), root[root]@localhost
+  SELECT COUNT(*) AS `count` FROM `comments` WHERE `post_id` = N
+
+Count: 217  Time=0.01s (1s)  Lock=0.00s (0s)  Rows=10.0 (2177), root[root]@localhost
+  SELECT `id` FROM `posts` WHERE `user_id` = N
+
+Count: 62  Time=0.01s (0s)  Lock=0.04s (2s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO `posts` (`user_id`, `mime`, `imgdata`, `body`) VALUES (N,'S','S','S')
+
+Count: 79  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO `comments` (`post_id`, `user_id`, `comment`) VALUES (N,N,'S')
+
+Count: 85  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  INSERT INTO `users` (`account_name`, `passhash`) VALUES ('S','S')
+
+Count: 437  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.9 (388), root[root]@localhost
+  SELECT * FROM users WHERE account_name = 'S' AND del_flg = N
+
+Count: 4106  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (4106), root[root]@localhost
+  SELECT @@max_allowed_packet
+
+Count: 4106  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SET NAMES utf8mb4
+
+Count: 276  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=7.7 (2116), root[root]@localhost
+  SELECT * FROM `comments` WHERE `post_id` = N ORDER BY `id` DESC
+
+Count: 1  Time=0.05s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM posts WHERE id > N
+
+Count: 217  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (217), root[root]@localhost
+  SELECT * FROM `users` WHERE `account_name` = 'S' AND `del_flg` = N
+
+Count: 1  Time=0.02s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`PARTITIONS`
+
+Count: 30  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (30), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N)
+
+Count: 36  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (36), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 24  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (24), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 19  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (19), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  UPDATE users SET del_flg = N
+
+Count: 1  Time=0.01s (0s)  Lock=0.00s (0s)  Rows=31.0 (31), debian-sys-maint[debian-sys-maint]@localhost
+  select concat('S',
+  TABLE_SCHEMA, 'S', TABLE_NAME, 'S') 
+  from information_schema.TABLES where ENGINE='S'
+
+Count: 85  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  SELECT N FROM users WHERE `account_name` = 'S'
+
+Count: 19  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (19), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N)
+
+Count: 29  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (29), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`COLUMNS`
+
+Count: 18  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (18), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM users WHERE id > N
+
+Count: 7  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (7), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  UPDATE users SET del_flg = N WHERE id % N = N
+
+Count: 5  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (5), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 6  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (6), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 9  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (9), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`TRIGGERS`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`VIEWS`
+
+Count: 6  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (6), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N)
+
+Count: 34  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (34), debian-sys-maint[debian-sys-maint]@localhost
+  select @@version_comment limit N
+
+Count: 5  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (5), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), root[root]@localhost
+  DELETE FROM comments WHERE id > N
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), debian-sys-maint[debian-sys-maint]@localhost
+  show variables like 'S'
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`PLUGINS`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), root[root]@localhost
+  SELECT COUNT(*) AS count FROM `comments` WHERE `post_id` IN (N, N, N)
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=1.0 (1), debian-sys-maint[debian-sys-maint]@localhost
+  SELECT count(*) FROM mysql.user WHERE user='S' and password='S'
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`PROCESSLIST`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`PARAMETERS`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`EVENTS`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `information_schema`.`ROUTINES`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`time_zone_transition`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`host`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`tables_priv`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`help_category`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`func`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`plugin`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`user`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`procs_priv`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`event`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`time_zone_name`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`time_zone_transition_type`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`proxies_priv`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`columns_priv`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`help_topic`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`time_zone`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`db`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`ndb_binlog_index`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`time_zone_leap_second`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`servers`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`proc`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`help_keyword`
+
+Count: 1  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), debian-sys-maint[debian-sys-maint]@localhost
+  select count(*) into @discard from `mysql`.`help_relation`
+
+Count: 2547  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Quit
+
+Count: 80887  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Close stmt
+
+Count: 2  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Ping
+
+Count: 80887  Time=0.00s (0s)  Lock=0.00s (0s)  Rows=0.0 (0), 0users@0hosts
+  administrator command: Prepare
+
